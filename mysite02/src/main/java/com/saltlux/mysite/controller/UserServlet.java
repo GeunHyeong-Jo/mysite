@@ -39,10 +39,10 @@ public class UserServlet extends HttpServlet {
 			}
 
 			Long no = authUser.getNo();
-			String email = new UserDao().getEmailFindByNo(no);
+			String email = new UserDao().findByNo(no).getEmail();
+			//TODO 오류가 발생하면 해당 위치!!!
 			request.setAttribute("myEmail", email);
 			request.setAttribute("userNo", no);
-			// TODO 여기에 회원정보를 업데이트하는 구문 추가 //회원의 NO는 성공적으로 넘어왔다
 			// UserVo userVo = (UserVo)new UserDao().findByNo(no);
 			// request.setAttribute("userVo", userVo); //jsp랑 연동해야함
 			WebUtil.forward("/WEB-INF/views/user/updateform.jsp", request, response);
