@@ -164,17 +164,16 @@ public class UserRepository {
 	}
 
 	@SuppressWarnings("null")
-	public UserVo findByNo(Long no) { /// user의 update를 위해 만들었으니 필요 없어짐
-		UserVo vo = null;
+	public UserVo findByNo(Long no) { 
+		UserVo userVo = null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		try {
-			vo.setNo(no);
 			conn = getConnection();
 
-			String sql = "SELECT email FROM user WHERE no=?";
+			String sql = "SELECT name, email, gender FROM user WHERE no=?";
 
 			pstmt = conn.prepareStatement(sql);
 
@@ -183,7 +182,14 @@ public class UserRepository {
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-
+				String name = rs.getString(1);
+				String email = rs.getString(2);
+				String gender = rs.getString(3);
+				
+				userVo = new UserVo();
+				userVo.setName(name);
+				userVo.setName(email);
+				userVo.setName(gender);
 			}
 		} catch (SQLException e) {
 			System.out.println("error : " + e);
@@ -203,7 +209,7 @@ public class UserRepository {
 			}
 		}
 
-		return vo;
+		return userVo;
 	}
 
 	public boolean update(UserVo userVo) {

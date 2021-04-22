@@ -18,7 +18,7 @@
 		<div id="content">
 			<div id="user">
 
-				<form id="join-form" name="joinForm" method="post" action="${pageContext.request.contextPath }/user?a=update">
+				<form id="join-form" name="joinForm" method="post" action="${pageContext.request.contextPath }/user/update">
 					<input type='hidden' name="a" value="update" />
 					<label class="block-label" for="email">이메일</label>
 					<h4>${myEmail}</h4>
