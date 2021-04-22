@@ -1,7 +1,5 @@
 package com.saltlux.mysite.exception;
 
-import java.io.StringWriter;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
