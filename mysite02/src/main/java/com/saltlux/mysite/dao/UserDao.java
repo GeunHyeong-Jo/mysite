@@ -98,26 +98,7 @@ public class UserDao {
 		return result;
 	}
 
-	// 완료
-	
-	private Connection getConnection() throws SQLException {// 중복된 코드를 줄이고 실수를 방지
-		Connection conn = null;
-		// 1. JDBC Driver 로딩
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
 
-			// 2. 연결하기
-			String url = "jdbc:mysql://localhost:3306/webdb?characterEncoding=utf8&serverTimezone=Asia/Seoul";
-			conn = DriverManager.getConnection(url, "webdb", "webdb");
-
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return conn;
-
-	}
 
 	public String getEmailFindByNo(Long no) { // 세션의 no를 받아 email을 반환
 		String email = null;
@@ -238,4 +219,24 @@ public class UserDao {
 		}
 		return result;
 	}
+	// 완료
+	
+		private Connection getConnection() throws SQLException {// 중복된 코드를 줄이고 실수를 방지
+			Connection conn = null;
+			// 1. JDBC Driver 로딩
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+
+				// 2. 연결하기
+				String url = "jdbc:mysql://localhost:3306/webdb?characterEncoding=utf8&serverTimezone=Asia/Seoul";
+				conn = DriverManager.getConnection(url, "webdb", "webdb");
+
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return conn;
+
+		}
 }

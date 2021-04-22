@@ -8,12 +8,13 @@ import java.sql.SQLException;
 
 import org.springframework.stereotype.Repository;
 
+import com.saltlux.mysite.exception.UserRepositoryException;
 import com.saltlux.mysite.vo.UserVo;
 
 @Repository
 public class UserRepository {
 
-	public UserVo findByEmailAndPassword(UserVo vo) {
+	public UserVo findByEmailAndPassword(UserVo vo) throws UserRepositoryException {
 		UserVo userVo = null;
 
 		Connection conn = null;
@@ -39,7 +40,7 @@ public class UserRepository {
 				userVo.setName(name);
 			}
 		} catch (SQLException e) {
-			System.out.println("error : " + e);
+			throw new UserRepositoryException(e.toString());
 		} finally {
 
 			try {
@@ -164,7 +165,7 @@ public class UserRepository {
 	}
 
 	@SuppressWarnings("null")
-	public UserVo findByNo(Long no) { 
+	public UserVo findByNo(Long no) {
 		UserVo userVo = null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -185,7 +186,7 @@ public class UserRepository {
 				String name = rs.getString(1);
 				String email = rs.getString(2);
 				String gender = rs.getString(3);
-				
+
 				userVo = new UserVo();
 				userVo.setName(name);
 				userVo.setName(email);
