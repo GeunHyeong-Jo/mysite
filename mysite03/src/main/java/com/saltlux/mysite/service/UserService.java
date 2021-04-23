@@ -30,6 +30,12 @@ public class UserService {
 		
 	}
 
+	public Boolean existUser(String email) {
+		
+		UserVo userVo=userRepository.findbyEmail(email);
+		return userVo != null;
+	}
+
 	
 	
 	
