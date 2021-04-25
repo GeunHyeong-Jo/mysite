@@ -6,33 +6,57 @@ public class PagerVo {
 	private int lastPage;
 	private int firstPageInCurrentPageGroup;
 	private int lastPageInCurrentPageGroup;
-
+	private int start;
+	private int end;
 	private int cntPerPage = 10;
 	private int cntPage = 5;
 
-	public PagerVo(int total, int cntPage, int nowPage ) {
+	public PagerVo() {
+
+	}
+
+	public PagerVo(int total, int cntPage, int nowPage) {
 		this.total = total;
 		this.cntPage = cntPage;
 		this.nowPage = nowPage;
-		
+
 		calcLastPage(total, cntPerPage);
-		
-		if(nowPage <= cntPage/2) {
+
+		if (nowPage <= cntPage / 2) {
 			this.firstPageInCurrentPageGroup = 1;
-			this.lastPageInCurrentPageGroup =  cntPage;
-			if(lastPage < this.lastPageInCurrentPageGroup) {
+			this.lastPageInCurrentPageGroup = cntPage;
+			if (lastPage < this.lastPageInCurrentPageGroup) {
 				this.lastPageInCurrentPageGroup = lastPage;
 			}
 		} else {
-			this.firstPageInCurrentPageGroup = nowPage - (cntPage-1)/2;
-			this.lastPageInCurrentPageGroup =  nowPage + (cntPage-1)/2;
-			if(this.lastPageInCurrentPageGroup >= lastPage) {
-				this.lastPageInCurrentPageGroup =  lastPage;
+			this.firstPageInCurrentPageGroup = nowPage - (cntPage - 1) / 2;
+			this.lastPageInCurrentPageGroup = nowPage + (cntPage - 1) / 2;
+			if (this.lastPageInCurrentPageGroup >= lastPage) {
+				this.lastPageInCurrentPageGroup = lastPage;
 			}
 		}
 	}
+
 	public void calcLastPage(int total, int cntPerPage) {
 		setLastPage((int) Math.ceil((double) total / (double) cntPerPage));
+	}
+
+	
+	
+	//(nowPage - 1) * cntPerPage
+	
+	//cntPerPage
+	
+	
+	
+	public int getStart() {
+		start=(nowPage-1)*cntPerPage;
+		return start;
+	}
+
+	public int getEnd() {
+		end=cntPerPage;
+		return end;
 	}
 
 	public int getNowPage() {

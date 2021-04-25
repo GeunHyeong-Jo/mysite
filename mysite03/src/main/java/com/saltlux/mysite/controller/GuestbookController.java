@@ -20,7 +20,7 @@ public class GuestbookController {
 	@RequestMapping("")
 	public String index(Model model) {
 		model.addAttribute("list", guestbookService.findAll());
-		return "guestbook/list";
+		return "guestbook/list";  //guestbook.jsp
 	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
@@ -32,7 +32,7 @@ public class GuestbookController {
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public String delete(@RequestParam("no") Long no, Model model) {
 		model.addAttribute("no", no);
-		return "/guestbook/deleteform";
+		return "/guestbook/deleteform"; //deleteform.jsp
 	}
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public String delete(GuestbookVo vo) {

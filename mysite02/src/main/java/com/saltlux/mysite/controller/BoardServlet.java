@@ -18,7 +18,7 @@ import com.saltlux.web.mvc.WebUtil;
 
 public class BoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
- 
+
 	// TODO 나중에 코드 줄일때 여기에 리스트 얻어서 넘기는 코드 옮기기
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -32,11 +32,12 @@ public class BoardServlet extends HttpServlet {
 		} else if ("reply".equals(action)) { // 원글보다 높은 orderNo를 1씩 추가하고 그자리에 답글을 집어 넣어 준다
 			String boardNo = request.getParameter("boardNo");
 			// view에서 hidden으로 받아 오기
-			
+
 			request.setAttribute("boardNo", boardNo); // write.jsp로 넘겨준다
-			
+
 			WebUtil.forward("/WEB-INF/views/board/write.jsp", request, response);
-			//WebUtil.redirect(request.getContextPath() + "/board?a=write&no=" + boardNo, request, response);
+			// WebUtil.redirect(request.getContextPath() + "/board?a=write&no=" + boardNo,
+			// request, response);
 		} else if ("write".equals(action)) {
 			String referer = request.getHeader("Referer");
 			System.out.println("이전의 경로 : " + referer);
@@ -46,7 +47,7 @@ public class BoardServlet extends HttpServlet {
 
 			BoardDao boardDao = new BoardDao();
 			UserVo authUser = (UserVo) session.getAttribute("authUser");
-			
+
 			// writeform이 문자열의 마지막이면 신규 등록
 			if (referer.substring(referer.length() - 9, referer.length()).equals("writeform")) {// 신규등록
 				g_no = boardDao.getMaxGno() + 1; // 자동으로 Group No를 증가한다
@@ -56,11 +57,11 @@ public class BoardServlet extends HttpServlet {
 				Long boardNo = Long.parseLong(request.getParameter("reply"));// 답을 달 원글
 				vo = boardDao.findByNo(boardNo);// 답을 달 글의 정보 요청
 
-				//원글의 정보
-				g_no= vo.getG_no();
-				o_no = vo.getO_no()+1L;
-				depth = vo.getDepth()+1L;
-				
+				// 원글의 정보
+				g_no = vo.getG_no();
+				o_no = vo.getO_no() + 1L;
+				depth = vo.getDepth() + 1L;
+
 				boardDao.updateOrder(g_no, o_no); // 추가하기 전에 원글의 뒷부분에 orderno를 늘려준다
 			}
 
@@ -112,7 +113,7 @@ public class BoardServlet extends HttpServlet {
 			vo.setNo(no);
 			vo.setTitle(title);
 			vo.setContent(content);
-			//System.out.println(vo);  //디버그용 
+			// System.out.println(vo); //디버그용
 			new BoardDao().update(vo);
 
 			WebUtil.redirect(request.getContextPath() + "/board", request, response);
@@ -138,33 +139,22 @@ public class BoardServlet extends HttpServlet {
 			WebUtil.forward("/WEB-INF/views/board/view.jsp", request, response);
 		} else {
 
-			int totalCount=0;
-		
-			BoardDao boardDao= new BoardDao();
-			int nowPage=1;
-			List<BoardVo> list =null;
-			if(request.getParameter("p") != null) {
-				nowPage = Integer.parseInt(request.getParameter("p"));	
+			int totalCount = 0;
+
+			BoardDao boardDao = new BoardDao();
+			int nowPage = 1;
+			List<BoardVo> list = null;
+			if (request.getParameter("p") != null) {
+				nowPage = Integer.parseInt(request.getParameter("p"));
 			}
-			
+
 			totalCount = boardDao.getCount();
-			PagerVo pagerVo= new PagerVo(totalCount,5,nowPage);
+			PagerVo pagerVo = new PagerVo(totalCount, 5, nowPage);
 			list = boardDao.findAll(pagerVo);
-			
-			
-			
-			
-			
-			
-			
+
 			request.setAttribute("list", list);
 			request.setAttribute("pagerVo", pagerVo);
-			
-			
-			
-			
-			
-			
+
 			if (session == null) {
 				WebUtil.forward("/WEB-INF/views/board/index.jsp", request, response);
 				return;

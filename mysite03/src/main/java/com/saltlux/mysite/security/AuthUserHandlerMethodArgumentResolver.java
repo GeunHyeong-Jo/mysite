@@ -15,8 +15,10 @@ import com.saltlux.mysite.vo.UserVo;
 public class AuthUserHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
 
 	@Override
-	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
-			NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
+	public Object resolveArgument(MethodParameter parameter,
+			ModelAndViewContainer mavContainer,
+			NativeWebRequest webRequest, /* 다른 웹 브라우저에서도 지원이 되어야 하기 때문에 NativeWebRequest으로 선언한다*/
+			WebDataBinderFactory binderFactory) throws Exception {
 		if (!supportsParameter(parameter)) {
 			return WebArgumentResolver.UNRESOLVED;
 		}

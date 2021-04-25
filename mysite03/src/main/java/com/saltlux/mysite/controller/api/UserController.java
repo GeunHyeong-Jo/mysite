@@ -9,7 +9,7 @@ import com.saltlux.dto.JsonResult;
 import com.saltlux.mysite.service.UserService;
 
 @Controller("userApiController")
-//@RestController("userApiController")
+//@RestController("userApiController")  
 @RequestMapping("/api/user")
 public class UserController {
 
@@ -26,7 +26,7 @@ public class UserController {
 
 	@ResponseBody
 	@RequestMapping("/hello")
-	public String hello() {
+	public String hello() {// 테스트용으로 사용하지는 않음
 
 		return "안녕하세요";
 	}
