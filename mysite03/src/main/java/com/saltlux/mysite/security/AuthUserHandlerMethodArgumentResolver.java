@@ -12,7 +12,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 
 import com.saltlux.mysite.vo.UserVo;
 
-public class AuthUserHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver {
+public class AuthUserHandlerMethodArgumentResolver implements HandlerMethodArgumentResolver { //UserController에서 update에 사용
 
 	@Override
 	public Object resolveArgument(MethodParameter parameter,

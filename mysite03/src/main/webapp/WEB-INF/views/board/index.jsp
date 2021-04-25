@@ -20,7 +20,7 @@
 					<input type="text" id="kwd" name="kwd" value=""> <input
 						type="submit" value="찾기">
 				</form>
-				<form action="${pageContext.request.contextPath}/board?a=delete"
+				<form action="${pageContext.request.contextPath}/board/delete"
 					method="post">
 					<table class="tbl-ex">
 						<tr>
@@ -42,7 +42,7 @@
 												src="${pageContext.request.contextPath}/assets/images/reply.png" />
 										</c:when>
 									</c:choose> <a class="title"
-									href="${pageContext.request.contextPath }/board?a=view&no=${board.no }"
+									href="${pageContext.request.contextPath }/board/view?no=${board.no }"
 									onclick="makeHistory(this)">${board.title }</a></td>
 								<td>${board.author }</td>
 								<td>${board.views }</td>
@@ -50,8 +50,8 @@
 								<!--  여기에 Vo에서 세션에 저장된 no로 비교해야한다 같으면 삭제버튼 활성화 and 가능하면 POST method로 보내야한다 -->
 								<c:if test="${authUser.no eq board.user_no}">
 									<td><a
-										href="${pageContext.request.contextPath}/board?a=delete&no=${board.no }"
-										class="del" type="submit" style="background:url("/mysite03/assets/images/recycle.png")">삭제</a></td>
+										href="${pageContext.request.contextPath}/board/delete?no=${board.no }"
+										class="del" type="submit">삭제</a></td>
 								</c:if>
 							</tr>
 						</c:forEach>
@@ -90,7 +90,7 @@
 
 				<div class="bottom">
 					<c:if test="${ !empty authUser }">
-						<a href="${pageContext.request.contextPath}/board?a=writeform"
+						<a href="${pageContext.request.contextPath}/board/writeform"
 							id="new-book">글쓰기</a>
 						<!-- <a href="${pageContext.request.contextPath}/board?a=modify" id="new-book">글수정</a> 글은 해당 글에 들어가서 수정해야함 -->
 					</c:if>

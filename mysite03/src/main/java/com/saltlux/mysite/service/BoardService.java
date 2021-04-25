@@ -23,6 +23,33 @@ public class BoardService {
 		return boardRepository.findAll(vo);
 	}
 
+	public Long getMaxGno(){
+		return boardRepository.getMaxGno();
+	}
+
+	public BoardVo findByNo(Long boardNo) {
+		return boardRepository.findbyno(boardNo);
+	}
+
+	public void updateOrder(Long g_no, Long o_no) {
+		boardRepository.updateOrder(g_no, o_no);
+	}
+
+	public void insert(BoardVo vo) {
+		boardRepository.insert(vo);
+	}
+
+	public void updateView(Long no) {
+		boardRepository.updateView(no);
+	}
+
+	public void update(BoardVo vo) {
+		boardRepository.update(vo);
+	}
+
+	public void delete(BoardVo vo) {
+		boardRepository.delete(vo);
+	}
 
 
 }

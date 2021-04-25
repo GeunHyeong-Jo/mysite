@@ -9,7 +9,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.saltlux.mysite.vo.UserVo;
 
-public class AuthInterceptor extends HandlerInterceptorAdapter {
+public class AuthInterceptor extends HandlerInterceptorAdapter { //@Auth를 위한 Interceptor
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -44,7 +44,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
 		if (authUser == null) {
-			response.sendRedirect(request.getContextPath() + "user/loglin");
+			response.sendRedirect(request.getContextPath() + "/user/login");
 			return false;
 		}
 
