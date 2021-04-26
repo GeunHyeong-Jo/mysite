@@ -12,5 +12,7 @@ import java.lang.annotation.Target;
 public @interface Auth { // 접근제어를 하기위한 Annotation
 	public String role() default "user";
 	//public Role role() default Role.USER;
+
+	
 	
 }

@@ -24,6 +24,9 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 
+	@Auth
+	private void temp() {};
+	
 	@RequestMapping("")  //  초기화면
 	public String index(HttpServletRequest request,Model model) {
 		int totalCount = 0;
@@ -40,7 +43,6 @@ public class BoardController {
 		model.addAttribute("list", list);
 		model.addAttribute("pagerVo", pagerVo);
 		
-
 		HttpSession session= request.getSession();
 		if (session == null) {
 			return "board/index";
@@ -54,7 +56,7 @@ public class BoardController {
 		return "board/index";  //board/index.jsp
 	}
 	
-	
+
 	@Auth
 	@RequestMapping("writeform")
 	public String writefrom() {
@@ -64,8 +66,6 @@ public class BoardController {
 	@RequestMapping("write")
 	public String write(@AuthUser UserVo authUser,HttpServletRequest request) {
 
-		authUser = (UserVo)	request.getSession().getAttribute("authUser");
-		////
 		String referer = request.getHeader("Referer");
 		System.out.println("이전의 경로 : " + referer);
 		Long g_no = 0L;
@@ -89,6 +89,9 @@ public class BoardController {
 			boardService.updateOrder(g_no, o_no); // 추가하기 전에 원글의 뒷부분에 orderno를 늘려준다
 		}
 
+		
+		
+		
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 
@@ -126,7 +129,6 @@ public class BoardController {
 		
 	@RequestMapping("modifyform")
 	public String modifyform(@AuthUser UserVo authUser, HttpServletRequest request, Model model) {
-		authUser = (UserVo)	request.getSession().getAttribute("authUser");
 		String boardNo = request.getParameter("no");// 수정할 글의 번호
 		System.out.println("수정할 글의 번호 : " + boardNo);
 		BoardVo vo = boardService.findByNo(Long.parseLong(boardNo));
@@ -158,7 +160,6 @@ public class BoardController {
 	}
 	@RequestMapping("delete")
 	public String delete(@AuthUser UserVo authUser, HttpServletRequest request) {
-		authUser = (UserVo)	request.getSession().getAttribute("authUser");
 		Long delNo = Long.parseLong(request.getParameter("no"));
 		BoardVo vo = new BoardVo();
 		vo.setNo(delNo);

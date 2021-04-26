@@ -25,16 +25,16 @@ public class AuthInterceptor extends HandlerInterceptorAdapter { //@Auth를 위�
 
 		// 3. Method에 @Auth 달려 있는지 확인
 		Auth auth = handlerMethod.getMethodAnnotation(Auth.class);
-
-		// 4. Method에 @Auth가 안달려 있으면
-		if (auth == null) {
+			
+		//3.1.type(class)에 @Auth가 달려있는지 확인
+		//Class<?> c =  handlerMethod.getMethod().getDeclaringClass();
+		
+		// 4. Method나 type(class)에 @Auth가 안달려 있으면
+		if (auth == null ) {
 			return true;
 		}
 
-		//5. type(class)에 달려있는지 확인
-		
-		
-		// 6. @Auth가 달려 있는 경우에는 인증(Authetication )여부 확인
+		// 5. @Auth가 달려 있는 경우에는 인증(Authetication )여부 확인
 		
 		HttpSession session = request.getSession();
 		if (session == null) {
@@ -47,10 +47,11 @@ public class AuthInterceptor extends HandlerInterceptorAdapter { //@Auth를 위�
 			response.sendRedirect(request.getContextPath() + "/user/login");
 			return false;
 		}
-
-		// 7. role 까지 체크(권한)
-		String roleAnnotaion= auth.role();
-		String roleUser = authUser.getRole();
+		// 6. role 까지 체크(권한)
+		
+//		String roleAnnotaion= auth.role();
+//		String roleUser = authUser.getRole();
+		
 		
 		
 		
